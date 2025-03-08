@@ -28,7 +28,7 @@ sudo dnf update -y
 Ensure the MySQL client is installed:
 
 ```bash
-sudo dnf install mysql -y
+sudo dnf install mysql-server -y
 ```
 
 ### 3. Create Backup Directory
@@ -74,37 +74,9 @@ sudo chmod 700 /backup/mysql
    sudo chmod +x /usr/local/bin/mysql_backup.sh
    ```
 
-### 5. Secure MySQL Password
 
-1. Create a `.my.cnf` file in the root user's home directory:
 
-   ```bash
-   sudo nano /root/.my.cnf
-   ```
-
-2. Add the following content:
-
-   ```ini
-   [client]
-   user=root
-   password=your_password
-   ```
-
-3. Save and exit the file.
-
-4. Secure the file permissions:
-
-   ```bash
-   sudo chmod 600 /root/.my.cnf
-   ```
-
-5. Update the script to use the `.my.cnf` file:
-
-   ```bash
-   mysqldump --defaults-extra-file=/root/.my.cnf --all-databases > $BACKUP_DIR/mysql_backup_$DATE.sql
-   ```
-
-### 6. Set Up Cron Job
+### 5. Set Up Cron Job
 
 1. Edit the root user's cron table:
 
@@ -120,7 +92,7 @@ sudo chmod 700 /backup/mysql
 
 3. Save and exit.
 
-### 7. Test the Script
+### 6. Test the Script
 
 Run the script manually to verify:
 
