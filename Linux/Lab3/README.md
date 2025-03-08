@@ -4,21 +4,20 @@
 ```
 #!/bin/bash
 
-// Iterate through all possible IP addresses in the 172.16.17.x subnet
-for i in {0..255}; do
-  // Define the current IP address
-  ip="172.16.17.$i"
-  
-  // Ping the IP address with a timeout of 1 second (adjustable)
-  ping -W 1 -c 1 $ip
-  
-  // Check the exit status of the ping command
-  if [ $? -eq 0 ]; then
-    echo "Server $ip is up and running"
+# Loop through all possible values of x (0 to 255)
+for x in {0..255}
+do
+  # Ping the current IP with a timeout of 1 second (-c 1 sends 1 packet, -W 1 sets timeout to 1 second)
+  if ping -c 1 -W 1 172.16.17.$x > /dev/null 2>&1
+  then
+    # If ping succeeds
+    echo "Server 172.16.17.$x is up and running"
   else
-    echo "Server $ip is unreachable"
+    # If ping fails
+    echo "Server 172.16.17.$x is unreachable"
   fi
 done
+
 ```
 ## Steps to Use the Script:
 ### 1- Create the Script File: Save the script to a file :
